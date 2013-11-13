@@ -1,0 +1,170 @@
+<project 
+   name="deployextension"
+   default="deploy.j2ee.web"
+   basedir=".">
+  <property name="newDeployPause" value="5"/>
+  <property name="reDeployPause" value="5"/>
+  <!-- only deploy if the archive does not exist in the auto deploy 
+       dir or the source is more recent -->
+  <target name="deploy.j2ee.web" 
+     depends="-checkWebDeploy" 
+     unless="notNeeded">
+  	
+  	<chmod file="${server.publish.dir}/../red5.sh" perm="ugo+rx"/>
+    <!-- no war file needed
+  	<jar destfile="${project.working.dir}/${module.name}.war"> 
+      <zipfileset dir="${module.dir}">
+        <include name="**/*.*"/>
+        <exclude name="**/jsp_servlet/*.class"/>
+        <exclude name="**/*.war"/>
+      </zipfileset>
+    </jar>
+    -->
+    <!-- set the pause to either the "new" or the "redeploy" value 
+         depending on whether the archive already exists in the 
+         autodeploy dir 
+    <available 
+       property="exists" 
+       file="${server.publish.dir}/${module.name}.war"/>-->
+    <condition 
+       property="pause" 
+       value="${newDeployPause}">
+      <not>
+        <istrue value="${exists}"/>
+       </not>
+    </condition>
+    <condition 
+       property="pause" 
+       value="${reDeployPause}">
+      <istrue value="${exists}"/>
+    </condition>
+  	
+  	<jar destfile="${project.working.dir}/${module.name}.jar"> 
+      <zipfileset dir="${project.working.dir}/${module.name}/WEB-INF/classes">
+        <include name="**/*.*"/>
+        <exclude name="**/*.java"/>
+      </zipfileset>
+    </jar>
+  	
+  	<copy file="${project.working.dir}/${module.name}.jar" todir="${server.publish.dir}/${module.name}/WEB-INF/lib"/>
+  	
+    <delete file="${project.working.dir}/${module.name}.jar"/>
+  	
+  	<copy todir="${server.publish.dir}">
+    	<fileset dir="${project.working.dir}/"/>
+  	</copy>
+  	<!--
+    <move 
+       file="${project.working.dir}/${module.name}.war" 
+       todir="${server.publish.dir}"/>-->
+    <!-- delay in seconds to the server a chance to pick up the 
+         autodeployment -->
+    <sleep seconds="${pause}"/>
+  </target>
+  <target name="-checkWebDeploy">
+    <uptodate 
+       property="notNeeded" 
+       targetfile="${server.publish.dir}/${module.name}.war">
+      <srcfiles dir="${module.dir}">
+        <include name="**/*.*"/>
+        <exclude name="**/jsp_servlet/*.class"/>
+        <exclude name="**/*.war"/>
+      </srcfiles>
+    </uptodate>
+  </target>
+  <target name="deploy.j2ee.ejb" 
+     depends="-checkEJBDeploy" 
+     unless="notNeeded">
+    <jar destfile="${project.working.dir}/${module.name}.jar"> 
+      <zipfileset dir="${module.dir}">
+        <include name="**/*.*"/>
+        <exclude name="**/*.java"/>
+      </zipfileset>
+    </jar>
+    <!-- set the pause to either the "new" or the "redeploy" value
+         depending on whether the archive already exists in the 
+         autodeploy dir -->
+    <available 
+       property="exists" 
+       file="${server.publish.dir}/${module.name}.jar"/>
+    <condition 
+       property="pause" 
+       value="${newDeployPause}">
+      <not>
+        <istrue value="${exists}"/>
+      </not>
+    </condition>
+    <condition 
+       property="pause" 
+       value="${reDeployPause}">
+      <istrue value="${exists}"/>
+    </condition>
+    <move 
+       file="${project.working.dir}/${module.name}.jar" 
+       todir="${server.publish.dir}"/>
+    <!-- delay in seconds to the server a chance to pick up the 
+         autodeployment -->
+    <sleep seconds="${pause}"/>
+  </target>
+  <target name="-checkEJBDeploy">
+    <uptodate 
+       property="notNeeded" 
+       targetfile="${server.publish.dir}/${module.name}.jar">
+      <srcfiles dir="${module.dir}">
+        <include name="**/*.*"/>
+        <exclude name="**/*.java"/>
+      </srcfiles>
+    </uptodate>
+  </target>
+  <target name="deploy.j2ee.ear" 
+     depends="-checkJ2EEDeploy" 
+     unless="notNeeded">
+    <jar destfile="${project.working.dir}/${module.name}.ear"> 
+      <zipfileset dir="${module.dir}">
+        <include name="**/*.*"/>
+        <exclude name="**/*.java"/>
+      </zipfileset>
+    </jar>
+    <!-- set the pause to either the "new" or the "redeploy" value 
+         depending on whether the archive already exists in the 
+         autodeploy dir -->
+    <available 
+       property="exists" 
+       file="${server.publish.dir}/${module.name}.war"/>
+    <condition 
+       property="pause" 
+       value="${newDeployPause}">
+      <not>
+        <istrue value="${exists}"/>
+      </not>
+    </condition>
+    <condition 
+       property="pause" 
+       value="${reDeployPause}">
+      <istrue value="${exists}"/>
+    </condition>
+    <move 
+       file="${project.working.dir}/${module.name}.ear" 
+       todir="${server.publish.dir}"/>
+    <sleep seconds="${pause}"/>
+  </target>
+  <target name="-checkJ2EEDeploy">
+    <uptodate 
+       property="notNeeded" 
+       targetfile="${server.publish.dir}/${module.name}.ear">
+      <srcfiles dir="${module.dir}">
+        <include name="**/*.*"/>
+        <exclude name="**/*.java"/>
+      </srcfiles>
+    </uptodate>
+  </target>
+  <target name="undeploy.j2ee.web">
+    <delete file="${server.publish.dir}/${module.name}.war"/>
+  </target>
+  <target name="undeploy.j2ee.ejb">
+    <delete file="${server.publish.dir}/${module.name}.jar"/>
+  </target>	
+  <target name="undeploy.j2ee.ear">
+    <delete file="${server.publish.dir}/${module.name}.ear"/>
+  </target>		
+</project>

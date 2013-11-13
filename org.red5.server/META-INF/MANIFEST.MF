@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Red5 Plug-in
+Bundle-SymbolicName: org.red5.server;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.jst.server.core,
+ org.eclipse.jst.server.generic.core,
+ org.eclipse.jst.server.generic.ui,
+ org.eclipse.wst.server.core,
+ org.eclipse.wst.common.project.facet.core,
+ org.eclipse.wst.common.project.facet.ui,
+ org.eclipse.jst.server.ui,
+ org.eclipse.jst.common.project.facet.core,
+ org.eclipse.wst.server.ui
+Bundle-Vendor: Infrared5 Inc.
+

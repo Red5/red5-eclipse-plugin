@@ -1,0 +1,56 @@
+<project 
+   name="Hello World"
+   default="hello"
+   basedir=".">
+  
+	<!-- 
+	only deploy if the archive does not exist in the auto deploy 
+	dir or the source is more recent 
+	 -->
+	<target name="copy" >
+	  	<echo>copy</echo>
+	  	<delete dir="tmp"/>
+	  	<mkdir dir="tmp"/>
+	  	<mkdir dir="tmp/Red5/WEB-INF"/>
+	  	<copy todir="tmp/Red5/WEB-INF">
+  	    	<fileset dir="templates/version/0_2/Red5/WEB-INF"/>
+  		</copy>
+	  	<mkdir dir="tmp/Flex"/>
+	  	<copy todir="tmp/Flex">
+  	    	<fileset dir="templates/version/0_2/Flex/"/>
+  		</copy>
+	</target>
+	
+	<target name="copy.flexunit" > 		
+	  	<echo>copy flexunit</echo>
+	  	<mkdir dir="tmp/FlexUnit"/>
+	  	<copy todir="tmp/FlexUnit">
+  	    	<fileset dir="templates/version/0_2/FlexUnit"/>
+  		</copy>
+	  </target>
+	
+	<!-- 
+	only deploy if the archive does not exist in 
+	the auto deploy dir or the source is more recent 
+    -->
+	<target name="hello" unless="notNeeded">
+	
+		<echo>Hello World!</echo>
+		
+		<replace dir="tmp">
+		<replacefilter token="@APP_NAME@" value="${APP_NAME}"/>
+		</replace>
+		
+		<!--
+		<replace dir="tmp2">
+			<replacefilter token="@APP_NAME@" value="${APP_NAME}"/>
+		</replace>
+		
+		<replace dir="TMP_FLEXUNIT">
+			<replacefilter token="@APP_NAME@" value="${APP_NAME}"/>
+		</replace>
+		-->
+	</target>
+	
+	
+</project>

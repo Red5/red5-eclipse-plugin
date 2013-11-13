@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+  <extension point="org.eclipse.wst.common.project.facet.core.facets">
+
+    <category id="red5.category">
+      <label>Red5 Application Generation</label>
+      <description>Enables generation of Red5 applications.</description>
+    </category>
+
+    <project-facet id="red5.core">
+      <label>Red5 Application Generation</label>
+      <description>
+        Enables generation of Red5 applications
+      </description>
+      <category>red5.category</category>
+    </project-facet>
+
+    <project-facet-version facet="red5.core" version="1.0">
+      <constraint>
+        <requires facet="jst.web" version="2.2,2.3,2.4,2.5,3.0"/>
+      </constraint>
+      <action type="INSTALL" id="red5.core.install">
+        <config-factory class="org.red5.eclipse.Red5CoreFacetInstallConfig$Factory"/>
+        <delegate class="org.red5.eclipse.Red5CoreFacetInstallDelegate"/>
+      </action>
+    </project-facet-version>
+   
+    <!-- </Example> -->
+
+    <preset id="red5.preset">
+      <label>Red5 Web Project</label>
+      <description>Creates a web project with Red5 functionality.</description>
+      <facet id="jst.java" version="7.0"/>
+      <facet id="jst.web" version="3.0"/>
+      <facet id="red5.core" version="1.0"/>
+    </preset>
+  
+  </extension>
+  
+  <extension point="org.eclipse.wst.common.project.facet.core.runtimes">
+    <supported>
+      <runtime-component any="true"/>
+      <facet id="red5.core"/>
+    </supported>
+  </extension>
+
+  <extension point="org.eclipse.wst.common.project.facet.ui.images">
+    <image facet="red5.core" path="icons/red5-ext.gif"/>
+    <image category="red5.category" path="icons/red5.gif"/>     
+  </extension>
+
+</plugin>

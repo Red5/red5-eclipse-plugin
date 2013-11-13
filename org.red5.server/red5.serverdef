@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:ServerRuntime
+   xmlns:tns="http://eclipse.org/jst/server/generic/ServerTypeDefinition"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://eclipse.org/jst/server/generic/ServerTypeDefinition ServerTypeDefinitionSchema.xsd "
+   name="Red5 Server" version="v0.7">
+
+<property id="serverRootDirectory"
+	label="Runtime Directory"
+	type="directory"
+	context="runtime"
+	default="/Applications/Red5" />
+<property id="domain"
+	label="Domain Directory"
+	type="directory"
+	context="string"
+	default="domain1" />
+<property id="autoDeployDirectory"
+	label="Auto Deploy Directory"
+	type="directory"
+	context="server"
+	default="/Applications/Red5/webapps/" />
+<property id="adminScript"
+	label="Start Script"
+	type="file"
+	context="server"
+	default="/Applications/Red5/red5-debug.sh" />
+<property id="adminShutdownScript"
+	label="Stop Script"
+	type="file"
+	context="server"
+	default="/Applications/Red5/red5-shutdown.sh" />
+<property id="port"
+	label="Server Port"
+	type="string"
+	context="server"
+	default="5080" />
+	
+<property id="debugPort"
+	label="Debug Port"
+	type="string"
+	context="server"
+	default="8787" />
+	
+<port>
+	<no>${port}</no>
+	<name>Http</name>
+	<protocol>http</protocol>start
+</port>
+
+<module>
+	<type>jst.web</type>
+	<publishDir>${autoDeployDirectory}</publishDir>
+	<publisherReference>org.eclipse.jst.server.generic.antpublisher</publisherReference>
+</module>
+
+<module>
+	<type>jst.ejb</type>
+	<publishDir>${autoDeployDirectory}</publishDir>
+	<publisherReference>org.eclipse.jst.server.generic.antpublisher</publisherReference>
+</module>
+
+<module>
+	<type>jst.ear</type>
+	<publishDir>${autoDeployDirectory}</publishDir>
+	<publisherReference>org.eclipse.jst.server.generic.antpublisher</publisherReference>
+</module>
+
+<project>
+	<classpathReference>sjsas</classpathReference>
+</project>
+
+<start>
+	<external>"${adminScript}" debug</external>
+	<workingDirectory>${serverRootDirectory}</workingDirectory>
+	<debugPort>${debugPort}</debugPort>
+</start>
+
+<stop>
+	<external>"${adminShutdownScript}"  "stop"</external>
+	<workingDirectory>${serverRootDirectory}</workingDirectory>
+</stop>
+
+<publisher id="org.eclipse.jst.server.generic.antpublisher">
+	<publisherdata>
+		<dataname>build.file</dataname>
+		<datavalue>sjsas.xml</datavalue>
+	</publisherdata>
+	<publisherdata>
+		<dataname>target.publish.jst.web</dataname>
+		<datavalue>deploy.j2ee.web</datavalue>
+	</publisherdata>
+	<publisherdata>
+		<dataname>target.publish.jst.ejb</dataname>
+		<datavalue>deploy.j2ee.ejb</datavalue>
+	</publisherdata>
+	<publisherdata>
+		<dataname>target.unpublish.jst.web</dataname>
+		<datavalue>undeploy.j2ee.web</datavalue>
+	</publisherdata>
+	<publisherdata>
+		<dataname>target.unpublish.jst.ejb</dataname>
+		<datavalue>undeploy.j2ee.ejb</datavalue>
+	</publisherdata>
+	<publisherdata>
+		<dataname>target.publish.jst.ear</dataname>
+		<datavalue>deploy.j2ee.ear</datavalue>
+	</publisherdata>
+	<publisherdata>
+		<dataname>target.unpublish.jst.ear</dataname>
+		<datavalue>undeploy.j2ee.ear</datavalue>
+	</publisherdata>					
+</publisher>
+
+<classpath id="sjsas">
+	<archive path="${serverRootDirectory}/red5.jar" />
+</classpath>
+
+<jndiConnection>
+	<providerUrl>http://localhost:${port}</providerUrl>
+	<initialContextFactory>not.used</initialContextFactory>
+	<jndiProperty>
+		<name></name>
+		<value></value>
+	</jndiProperty>
+</jndiConnection>
+
+</tns:ServerRuntime>
