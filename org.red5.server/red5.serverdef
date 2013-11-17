@@ -113,7 +113,7 @@
 </publisher>
 
 <classpath id="sjsas">
-	<archive path="${serverRootDirectory}/red5.jar" />
+	<archive path="${serverRootDirectory}/red5-server.jar" />
 </classpath>
 
 <jndiConnection>
