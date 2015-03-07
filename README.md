@@ -44,7 +44,7 @@ Once eclipse restarts verify that the plugin was successfully installed by going
 
 ## Starting Red5 Project
 
-To get an idea of how it to work with the red5 plugin to create a new red5 project follow the video:
+To get an idea of how to work with the red5 plugin and how to create a new red5 project follow the video:
 https://www.youtube.com/watch?v=8Goj0yNYr08
 
 
