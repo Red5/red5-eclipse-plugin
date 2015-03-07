@@ -15,3 +15,4 @@ Require-Bundle: org.eclipse.jst.server.core,
  org.eclipse.wst.server.ui
 Bundle-Vendor: Infrared5 Inc.
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+
