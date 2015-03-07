@@ -19,12 +19,15 @@ Red5 Integration for Eclipse
 ![Exporting plugin files](/screenshots/screen1.jpg?raw=true "Export - Getting ready !!")
 
 ![Selecting export type](/screenshots/screen2.jpg?raw=true "Select export type")
+* Select Plugin Development -> Deployable-plugins and fragments
 
 ![Selecting plugins and fragments](/screenshots/screen3.jpg?raw=true "Selecting plugins and fragments")
+* Select "Install into host. Repository:"
 
 ![Plugin is installing](/screenshots/screen4.jpg?raw=true "Plugin is installing")
 
 ![Installation complete](/screenshots/screen5.jpg?raw=true "Installation complete")
+* Restart eclipse once installation is complete
 
 
 ## Verifying installation
