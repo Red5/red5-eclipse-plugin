@@ -123,7 +123,8 @@ public final class Utils
     /**
      * @return
      */
-    public static File getPluginFolderRoot() {
+    @SuppressWarnings("deprecation")
+	public static File getPluginFolderRoot() {
     	File _pluginFolder = null;
         if(_pluginFolder == null) {
             URL url = Platform.getBundle("org.red5.wizard").getEntry("/");
@@ -142,7 +143,8 @@ public final class Utils
     /**
      * @return
      */
-    public static File getPluginFolder() {
+    @SuppressWarnings("deprecation")
+	public static File getPluginFolder() {
         Object _pluginFolder = null;
 		if(_pluginFolder == null) {
 			final Bundle bundle = Red5Plugin.getInstance().getBundle();
