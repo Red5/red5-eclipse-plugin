@@ -1,4 +1,4 @@
-red5plugin (Forked from https://github.com/Red5/red5-eclipse-plugin )
+red5plugin
 ==========
 
 Red5 Integration for Eclipse
