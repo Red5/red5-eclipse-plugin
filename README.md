@@ -3,7 +3,6 @@ red5plugin
 
 Red5 Integration for Eclipse
 
-
 ## Download & Build the plugin
 
 
@@ -43,11 +42,9 @@ Once eclipse restarts verify that the plugin was successfully installed by going
 
 
 ## Starting Red5 Project
-
 To get an idea of how to work with the red5 plugin and how to create a new red5 project follow the video:
-https://www.youtube.com/watch?v=8Goj0yNYr08
+https://www.youtube.com/watch?v=8Goj0yNYr08 [By Dominick Accattato]
 
 
-[By Dominick Accattato]
-More informational videos can be found in the channel.
-
+## Troubleshooting
+1. Classpath erros for eclipse packages - If you get classpath erros, check if you have the PDE (Plugin Developent Environment), you can install using the URL http://marketplace.eclipse.org/content/eclipse-pde-plug-development-environment
