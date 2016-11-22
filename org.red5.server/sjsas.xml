@@ -46,7 +46,7 @@
       </zipfileset>
     </jar>
   	
-  	<copy file="${project.working.dir}/${module.name}.jar" todir="${server.publish.dir}/${module.name}/WEB-INF/lib"/>
+  	<copy file="${project.working.dir}/${module.name}.jar" todir="${server.publish.dir}/webapps/${module.name}/WEB-INF/lib"/>
   	
     <delete file="${project.working.dir}/${module.name}.jar"/>
   	
