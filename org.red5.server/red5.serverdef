@@ -115,7 +115,8 @@
 <classpath id="sjsas">
 	<archive path="${serverRootDirectory}/red5-server.jar" />
 	<archive path="${serverRootDirectory}/red5-service.jar" />
-	<archive path="${serverRootDirectory}/red5-server-common.jar" />
+	<archive path="${serverRootDirectory}/lib/red5-io.jar" />
+	<archive path="${serverRootDirectory}/lib/red5-server-common.jar" />
 </classpath>
 
 <jndiConnection>
