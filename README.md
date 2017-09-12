@@ -8,8 +8,8 @@ Red5 Integration for Eclipse
 
 1. Download the latest JEE eclipse (I use LUNA). 
 2. Download the repository files as zip / clone the project to your machine.
-3. Import the project to your eclipse : Import -> Existing projects to workspace -> Select root directory -> {browse locate the downloaded repository folder}
-4. Clean project anf make sure you dont have any errors showing. Warnings are ok.
+3. Import the project to your eclipse(you need to unzip the file first, if its zip file) : Import -> Existing projects to workspace -> Select root directory -> {browse locate the downloaded repository folder}
+4. Clean project and make sure you dont have any errors showing. Warnings are ok.
 
 
 ## Installing the plugin to your Eclipse IDE
